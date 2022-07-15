@@ -1,0 +1,45 @@
+{
+  "name": "phaser-game-jam-seed",
+  "version": "1.0.0",
+  "description": "",
+  "author": "Niles Tanner",
+  "main": "dist/main.js",
+  "scripts": {
+    "build": "webpack",
+    "dev": "webpack serve",
+    "start": "electron .",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "package": "electron-builder"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nilestanner/phaser-game-jam-seed.git"
+  },
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nilestanner/phaser-game-jam-seed/issues"
+  },
+  "homepage": "https://github.com/nilestanner/phaser-game-jam-seed#readme",
+  "dependencies": {
+    "phaser": "^3.60.0-beta.9"
+  },
+  "devDependencies": {
+    "copy-webpack-plugin": "^9.0.0",
+    "electron": "^13.1.1",
+    "electron-builder": "^22.10.5",
+    "ts-loader": "^9.2.3",
+    "typescript": "^4.6.4",
+    "webpack": "^5.38.1",
+    "webpack-cli": "^4.7.2",
+    "webpack-dev-server": "^3.11.2"
+  },
+  "build": {
+    "appId": "com.startergame",
+    "files": [
+      "dist/**/*"
+    ],
+    "directories": {
+      "output": "installer"
+    }
+  }
+}
