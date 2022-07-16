@@ -1,4 +1,3 @@
-
 import { GameObjects, Scene } from 'phaser';
 
 export enum BlockType {

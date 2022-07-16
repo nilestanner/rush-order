@@ -2,6 +2,7 @@
 import { GameObjects, Scene } from 'phaser';
 import { RunScene } from '../scene/start/start.scene';
 import { Block } from './block';
+import { Collectible, CollectibleType } from './collectible';
 
 
 export class Player extends GameObjects.Sprite {
@@ -30,6 +31,7 @@ export class Player extends GameObjects.Sprite {
     this.scene.physics.add.existing(this);
     this.scene.physics.add.collider(this, this.scene.movables);
     this.scene.physics.add.collider(this, this.scene.staticObjects);
+    this.scene.physics.add.collider(this, this.scene.collectibles, this.collect);
     scene.add.existing(this);
 
     this.scene.anims.create({
@@ -37,7 +39,6 @@ export class Player extends GameObjects.Sprite {
       frames: this.anims.generateFrameNames('player_idle'),
       frameRate: 4,
       repeat: -1,
-      
     });
 
     this.scene.anims.create({
@@ -92,7 +93,6 @@ export class Player extends GameObjects.Sprite {
       }
     } else {
       if (!this.moveState.inAir && currentXV !== 0) {
-        console.log(currentXV);
         currentXV += (currentXV > 0 ? -this.velocityDamping : this.velocityDamping);
         if (Math.abs(currentXV) < this.velocityDamping) {
           currentXV = 0
@@ -140,6 +140,15 @@ export class Player extends GameObjects.Sprite {
     this.anims.play('player_run_animation', true);
   }
 
-  set
+  collect(player: Player, collectible: Collectible) {
+    if (collectible.type === CollectibleType.CASH) {
+      console.log('picked up cash');
+      
+    } else if (collectible.type === CollectibleType.CARD) {
+      console.log('picked up card');
+    }
+
+    collectible.destroy();
+  }
 
 }

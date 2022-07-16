@@ -32,6 +32,13 @@ export class BootScene extends Phaser.Scene {
     this.load.atlas('player_idle', 'assets/sprites/player_idle.png', 'assets/sprites/player_idle.json');
     this.load.atlas('player_run', 'assets/sprites/player_run.png', 'assets/sprites/player_run.json');
 
+    // other animated GameObjects
+    this.load.atlas('card', 'assets/sprites/card.png', 'assets/sprites/card.json');
+    this.load.atlas('cash', 'assets/sprites/cash.png', 'assets/sprites/cash.json');
+    this.load.atlas('conveyor_belt', 'assets/sprites/conveyor_belt.png', 'assets/sprites/conveyor_belt.json');
+    this.load.atlas('crusher', 'assets/sprites/crusher.png', 'assets/sprites/crusher.json');
+    this.load.atlas('flip_platform', 'assets/sprites/flip_platform.png', 'assets/sprites/flip_platform.json');
+    this.load.atlas('hammer', 'assets/sprites/hammer.png', 'assets/sprites/hammer.json');
   }
 
   public create() {
@@ -39,7 +46,6 @@ export class BootScene extends Phaser.Scene {
   }
 
   public update() {
-    console.log('go to main')
-    this.scene.start('main')
+    this.scene.start('main');
   }
 }
