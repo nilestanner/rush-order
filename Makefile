@@ -16,3 +16,6 @@ electron:
 
 build-electron:
 	npm run package
+
+gen-sprites:
+	node generate-animation-files.js

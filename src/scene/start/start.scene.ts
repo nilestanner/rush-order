@@ -35,7 +35,7 @@ export class RunScene extends Phaser.Scene {
     this.movables.push(new Block(this, 600, 430, 'metal_crate_block_floor', BlockType.MOVEABLE));
 
     // must create player after other objects so collisions work
-    this.player = new Player(this, 400, 400, 'single_metal_block_floor');
+    this.player = new Player(this, 400, 400, 'player_idle');
 
     this.physics.add.collider(this.staticObjects, this.movables);
     
