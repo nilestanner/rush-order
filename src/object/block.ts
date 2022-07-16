@@ -18,11 +18,10 @@ export class Block extends GameObjects.Sprite {
     type: BlockType = BlockType.SOLID,
   ) {
     super(scene, x, y, texture);
-    this.scene.physics.add.existing(this);
+    this.scene.physics.add.existing(this, type === BlockType.SOLID);
     if (type === BlockType.MOVEABLE) {
 
     } else if (type === BlockType.SOLID) {
-
     }
     scene.add.existing(this);
   }
