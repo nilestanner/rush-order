@@ -3,6 +3,7 @@ import { GameObjects, Scene } from 'phaser';
 import { RunScene } from '../scene/start/start.scene';
 import { Block } from './block';
 import { Collectible, CollectibleType } from './collectible';
+import { ConveyorBelt } from './conveyor_belt';
 
 
 export class Player extends GameObjects.Sprite {
@@ -32,6 +33,7 @@ export class Player extends GameObjects.Sprite {
     this.scene.physics.add.collider(this, this.scene.movables);
     this.scene.physics.add.collider(this, this.scene.staticObjects);
     this.scene.physics.add.collider(this, this.scene.collectibles, this.collect);
+    this.scene.physics.add.collider(this, this.scene.belts, this.handleConveyor);
     scene.add.existing(this);
 
     this.scene.anims.create({
@@ -149,6 +151,12 @@ export class Player extends GameObjects.Sprite {
     }
 
     collectible.destroy();
+  }
+
+  handleConveyor(player: Player, belt: ConveyorBelt ) {
+    if (belt.body.touching.up && player.body.touching.down){
+      player.body.position.add(belt.speed);
+    }
   }
 
 }
