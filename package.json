@@ -27,6 +27,7 @@
     "copy-webpack-plugin": "^9.0.0",
     "electron": "^13.1.1",
     "electron-builder": "^22.10.5",
+    "free-tex-packer-core": "^0.3.4",
     "ts-loader": "^9.2.3",
     "typescript": "^4.6.4",
     "webpack": "^5.38.1",
