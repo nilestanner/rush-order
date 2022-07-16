@@ -28,7 +28,7 @@ export class Hammer extends GameObjects.Sprite {
     const hammerBounds: any = {};
     this.body.getBounds(hammerBounds);
     const objectBounds: any = {};
-    object.body.getBounds(objectBounds);
+    (object.body as any).getBounds(objectBounds);
     // console.log('h', hammerBounds);
     // console.log('o', objectBounds);
 
