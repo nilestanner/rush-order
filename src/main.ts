@@ -1,10 +1,10 @@
 import * as Phaser from 'phaser';
 import { BootScene } from './scene/start/boot.scene';
-import { StartScene } from './scene/start/start.scene';
+import { RunScene } from './scene/start/start.scene';
 
 const gameConfig: Phaser.Types.Core.GameConfig = {
   title: 'Sample',
-  scene: [BootScene, StartScene],
+  scene: [BootScene, RunScene],
   type: Phaser.AUTO,
 
   scale: {
@@ -20,6 +20,7 @@ const gameConfig: Phaser.Types.Core.GameConfig = {
         x: 0,
         y: 1_000, // toggle how strong gravity down is
       },
+      tileBias: 100,
     },
   },
 
