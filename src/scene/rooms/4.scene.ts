@@ -1,4 +1,5 @@
 import * as Phaser from 'phaser';
+import { GameState } from '../../global';
 import { Block, BlockType } from '../../object/block';
 import { Player } from '../../object/player';
 
@@ -66,7 +67,8 @@ export class Room extends Phaser.Scene {
     this.player.update();
 
     if (this.player.x > 2000) { // TODO border of map
-      this.scene.start('component-2'); // TODO random next level
+      this.scene.start(GameState.nextRoom());
     }
+    // TODO go backward?
   }
 }
