@@ -33,7 +33,7 @@ export class Player extends GameObjects.Sprite {
     this.scene.physics.add.collider(this, this.scene.movables);
     this.scene.physics.add.collider(this, this.scene.staticObjects);
     this.scene.physics.add.collider(this, this.scene.collectibles, this.collect);
-    this.scene.physics.add.collider(this, this.scene.hammers, this.squish);
+    this.scene.physics.add.overlap(this, this.scene.hammers, this.squish);
     scene.add.existing(this);
 
     this.scene.anims.create({

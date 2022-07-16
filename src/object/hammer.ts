@@ -18,14 +18,33 @@ export class Hammer extends GameObjects.Sprite {
     this.scene.anims.create({
       key: 'hammer_animation',
       frames: this.anims.generateFrameNames('hammer'),
-      frameRate: 15,
+      frameRate: 10,
       repeat: -1,
     });
     this.anims.play('hammer_animation', true);
   }
 
   canSquish(object: Phaser.GameObjects.Sprite): boolean {
-    return true;
+    const hammerBounds: any = {};
+    this.body.getBounds(hammerBounds);
+    const objectBounds: any = {};
+    object.body.getBounds(objectBounds);
+    // console.log('h', hammerBounds);
+    // console.log('o', objectBounds);
+
+    const hammerTop = hammerBounds.y;
+    const objectTop = object.y;
+    const hammerIsAbovePlayer = hammerTop < objectTop;
+    const playerheadIsAboveHammerBottom = hammerBounds.bottom > objectTop;
+    // console.log('hammer', hammerIsAbovePlayer);
+    // console.log('player', playerheadIsAboveHammerBottom);
+    if (
+      hammerIsAbovePlayer
+      && playerheadIsAboveHammerBottom
+    ) {
+      return true;
+    }
+    return false;
   }
 
   update(): void {

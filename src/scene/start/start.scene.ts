@@ -40,7 +40,7 @@ export class RunScene extends Phaser.Scene {
     ]
 
     this.hammers = [
-      new Hammer(this, 440, 400),
+      new Hammer(this, 460, 430),
     ];
     
     this.movables.push(new Block(this, 600, 430, 'metal_crate_block_floor', BlockType.MOVEABLE));
