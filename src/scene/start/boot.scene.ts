@@ -7,6 +7,10 @@ const sceneConfig: Phaser.Types.Scenes.SettingsConfig = {
   key: 'boot',
 };
 
+function randomInt(low: number, high: number) {
+  return Math.floor(Math.random() * (high - low)) + low;
+}
+
 // this is the first scene, we might have a loading screen here but for now this just loads assets
 export class BootScene extends Phaser.Scene {
 
@@ -36,6 +40,9 @@ export class BootScene extends Phaser.Scene {
 
   public update() {
     console.log('go to main')
-    this.scene.start('main')
+
+    const numComponentScenes = [];
+    const randomStart = randomInt(2, 4);
+    this.scene.start(`component-${randomStart}`)
   }
 }
