@@ -11,7 +11,7 @@ const sceneConfig: Phaser.Types.Scenes.SettingsConfig = {
 /**
  * Just dsiplays a bunch of objects
  */
-export class Component extends Phaser.Scene {
+export class Room extends Phaser.Scene {
 
   public staticObjects: Array<Block> = [];
   public movables: Array<Block> = [];

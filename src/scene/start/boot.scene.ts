@@ -42,7 +42,8 @@ export class BootScene extends Phaser.Scene {
     console.log('go to main')
 
     const numComponentScenes = [];
-    const randomStart = randomInt(2, 4);
-    this.scene.start(`component-${randomStart}`)
+    const randomStart = randomInt(2, 5);
+    // this.scene.start(`component-${randomStart}`)
+    this.scene.start(`component-4`)
   }
 }

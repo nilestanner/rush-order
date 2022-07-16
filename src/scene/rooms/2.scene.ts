@@ -5,7 +5,7 @@ import { Player } from '../../object/player';
 const sceneConfig: Phaser.Types.Scenes.SettingsConfig = {
   active: false,
   visible: false,
-  key: 'component-3',
+  key: 'component-2',
 };
 
 function lineOfBlocks(
@@ -29,7 +29,7 @@ function lineOfBlocks(
 /**
  * A stacking puzzle
  */
-export class Component extends Phaser.Scene {
+export class Room extends Phaser.Scene {
 
   public staticObjects: Array<Block> = [];
   public movables: Array<Block> = [];
@@ -43,8 +43,15 @@ export class Component extends Phaser.Scene {
     console.log('scene start')
     
     this.staticObjects = [
-      ...lineOfBlocks(this, 0, 800, 'single_metal_block_floor', BlockType.SOLID, 30),
+      new Block(this, 400, 500, 'single_block_floor', BlockType.SOLID),
+      new Block(this, 800, 500, 'single_block_floor', BlockType.SOLID),
+      new Block(this, 1200, 500, 'single_block_floor', BlockType.SOLID),
+      ...lineOfBlocks(this, 1200, 800, 'single_metal_block_floor', BlockType.SOLID, 15),
+      new Block(this, 800 + (12-1) * 70, 730, 'single_block_floor', BlockType.SOLID),
     ];
+
+    this.movables.push(new Block(this, 800, 430, 'metal_crate_block_floor', BlockType.MOVEABLE));
+    this.movables.push(new Block(this, 1200, 430, 'metal_crate_block_floor', BlockType.MOVEABLE));
 
     // must create player after other objects so collisions work
     this.player = new Player(this, 400, 400, 'single_metal_block_floor');
@@ -58,7 +65,7 @@ export class Component extends Phaser.Scene {
     this.player.update();
 
     if (this.player.x > 2000) { // TODO border of map
-      this.scene.start('component-2'); // TODO random next level
+      this.scene.start('component-3'); // TODO random next level
     }
   }
 }
