@@ -38,7 +38,7 @@ export class BootScene extends Phaser.Scene {
   public update() {
     console.log('go to main')
 
-    GameState.initialize(['component-2', 'component-3', 'component-4']);
+    GameState.initialize(['room-2', 'room-3', 'room-4']);
     this.scene.start(GameState.currentRoom())
   }
 }

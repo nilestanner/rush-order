@@ -5,7 +5,7 @@ import { Player } from '../../object/player';
 const sceneConfig: Phaser.Types.Scenes.SettingsConfig = {
   active: false,
   visible: false,
-  key: 'component-1',
+  key: 'room-1',
 };
 
 /**

@@ -6,7 +6,7 @@ import { Player } from '../../object/player';
 const sceneConfig: Phaser.Types.Scenes.SettingsConfig = {
   active: false,
   visible: false,
-  key: 'component-4',
+  key: 'room-4',
 };
 
 function lineOfBlocks(
