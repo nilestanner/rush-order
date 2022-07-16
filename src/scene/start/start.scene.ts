@@ -1,27 +1,29 @@
 import * as Phaser from 'phaser';
+import { Block, BlockType } from '../../object/block';
 
 const sceneConfig: Phaser.Types.Scenes.SettingsConfig = {
   active: false,
   visible: false,
-  key: 'Game',
+  key: 'main',
 };
 
 export class StartScene extends Phaser.Scene {
-  private square: Phaser.GameObjects.Rectangle & { body: Phaser.Physics.Arcade.Body };
+  private square: Block;
 
   constructor() {
     super(sceneConfig);
   }
 
   public create() {
-    this.square = this.add.rectangle(400, 400, 100, 100, 0xFFFFFF) as any;
-    this.physics.add.existing(this.square);
+    console.log('scene start')
+    this.square = new Block(this, 400, 400, 'single_metal_block_floor', BlockType.MOVEABLE)
   }
 
   public update() {
     const cursorKeys = this.input.keyboard.createCursorKeys();
 
     if (cursorKeys.up.isDown) {
+      this.square
       this.square.body.setVelocityY(-500);
     } else if (cursorKeys.down.isDown) {
       this.square.body.setVelocityY(500);
