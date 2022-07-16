@@ -1,7 +1,9 @@
 import * as Phaser from 'phaser';
+import * as components from '../../components';
 import { Block, BlockType } from '../../object/block';
 import { Collectible, CollectibleType } from '../../object/collectible';
 import { ConveyorBelt } from '../../object/conveyor_belt';
+import { Hammer } from '../../object/hammer';
 import { Player } from '../../object/player';
 
 const sceneConfig: Phaser.Types.Scenes.SettingsConfig = {
@@ -16,6 +18,7 @@ export class RunScene extends Phaser.Scene {
   public movables: Array<Block> = [];
   public collectibles: Array<Collectible> = [];
   public belts: Array<ConveyorBelt> = [];
+  public hammers: Array<Hammer> = [];
   public player: Player;
 
   constructor() {
@@ -37,22 +40,18 @@ export class RunScene extends Phaser.Scene {
       new Block(this, 400, 500, 'single_block_floor', BlockType.SOLID),
 
       new Block(this, 190, 430, 'single_block_floor', BlockType.SOLID),
-     
-      new Block(this, 190, 500, 'single_block_floor', BlockType.SOLID),
-      new Block(this, 260, 500, 'single_block_floor', BlockType.SOLID),
-      new Block(this, 330, 500, 'single_block_floor', BlockType.SOLID),
-      new Block(this, 400, 500, 'single_block_floor', BlockType.SOLID),
-      new Block(this, 470, 500, 'single_block_floor', BlockType.SOLID),
-      new Block(this, 540, 500, 'single_block_floor', BlockType.SOLID),
-      new Block(this, 610, 500, 'single_block_floor', BlockType.SOLID),
-      new Block(this, 680, 500, 'single_block_floor', BlockType.SOLID),
-      new Block(this, 750, 500, 'single_block_floor', BlockType.SOLID),
+
+      ...components.lineOfBlocks(this, 190, 500, 9, 'single_block_floor', BlockType.SOLID),
 
     ];
     this.collectibles = [
       new Collectible(this, 600, 350, 'cash', CollectibleType.CASH),
       new Collectible(this, 650, 350, 'card', CollectibleType.CARD),
     ]
+
+    this.hammers = [
+      new Hammer(this, 460, 430),
+    ];
     
     this.movables.push(new Block(this, 600, 430, 'metal_crate_block_floor', BlockType.MOVEABLE));
     this.movables.push(new Block(this, 400, 300, 'metal_crate_block_floor', BlockType.MOVEABLE));
@@ -68,5 +67,6 @@ export class RunScene extends Phaser.Scene {
 
   public update() {
     this.player.update();
+    this.hammers.forEach(h => h.update());
   }
 }

@@ -4,6 +4,7 @@ import { RunScene } from '../scene/start/start.scene';
 import { Block } from './block';
 import { Collectible, CollectibleType } from './collectible';
 import { ConveyorBelt } from './conveyor_belt';
+import { Hammer } from './hammer';
 
 
 export class Player extends GameObjects.Sprite {
@@ -34,6 +35,8 @@ export class Player extends GameObjects.Sprite {
     this.scene.physics.add.collider(this, this.scene.staticObjects);
     this.scene.physics.add.collider(this, this.scene.collectibles, this.collect);
     this.scene.physics.add.collider(this, this.scene.belts, this.handleConveyor);
+    this.scene.physics.add.collider(this, this.scene.hammers);
+    this.scene.physics.add.overlap(this, this.scene.hammers, this.squish);
     scene.add.existing(this);
 
     this.scene.anims.create({
@@ -159,4 +162,9 @@ export class Player extends GameObjects.Sprite {
     }
   }
 
+  squish(player: Player, hammer: Hammer) {
+    if (hammer.canSquish(player)) {
+      console.log('squished');
+    }
+  }
 }
