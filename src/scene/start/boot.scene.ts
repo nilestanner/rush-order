@@ -26,6 +26,8 @@ export class BootScene extends Phaser.Scene {
     this.load.image('single_conrete_block_floor', 'assets/factory/tiles/platformIndustrial_019.png');
 
     this.load.image('single_metal_block_floor', 'assets/factory/tiles/platformIndustrial_029.png');
+    this.load.image('metal_crate_block_floor', 'assets/factory/tiles/platformIndustrial_057.png');
+
   }
 
   public create() {

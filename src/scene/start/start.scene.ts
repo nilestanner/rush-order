@@ -8,8 +8,9 @@ const sceneConfig: Phaser.Types.Scenes.SettingsConfig = {
 };
 
 export class StartScene extends Phaser.Scene {
-  private square: Block;
-  private squares: Array<Block>;
+  private player: Block;
+  private staticObjects: Array<Block> = [];
+  private movables: Array<Block> = [];
 
   constructor() {
     super(sceneConfig);
@@ -17,33 +18,44 @@ export class StartScene extends Phaser.Scene {
 
   public create() {
     console.log('scene start')
-    this.square = new Block(this, 400, 400, 'single_metal_block_floor', BlockType.MOVEABLE)
-    this.squares = [
+    this.player = new Block(this, 400, 400, 'single_metal_block_floor', BlockType.MOVEABLE);
+    this.staticObjects = [
       new Block(this, 800, 400, 'single_block_floor', BlockType.SOLID),
       new Block(this, 400, 500, 'single_block_floor', BlockType.SOLID),
+      // 5 in a row
+      new Block(this, 400, 500, 'single_block_floor', BlockType.SOLID),
+      new Block(this, 470, 500, 'single_block_floor', BlockType.SOLID),
+      new Block(this, 540, 500, 'single_block_floor', BlockType.SOLID),
+      new Block(this, 610, 500, 'single_block_floor', BlockType.SOLID),
+      new Block(this, 680, 500, 'single_block_floor', BlockType.SOLID),
+      new Block(this, 750, 500, 'single_block_floor', BlockType.SOLID),
     ];
+    this.movables.push(new Block(this, 600, 430, 'metal_crate_block_floor', BlockType.MOVEABLE))
+
+    this.physics.add.collider(this.staticObjects, this.movables);
+    this.physics.add.collider(this.player, [...this.movables, ...this.staticObjects]);
     this.physics.world.setBoundsCollision(true, true, true, true);
   }
 
   public update() {
     const cursorKeys = this.input.keyboard.createCursorKeys();
-    if (this.squares.some(s => this.physics.collide(this.square, s))) {
+    if (this.staticObjects.some(s => this.physics.collide(this.player, s))) {
       if (cursorKeys.up.isDown) {
-        this.square.body.setVelocityY(-500);
+        this.player.body.setVelocityY(-500);
       } else if (cursorKeys.down.isDown) {
-        this.square.body.setVelocityY(500);
+        this.player.body.setVelocityY(500);
       } else {
-        this.square.body.setVelocityY(0);
+        this.player.body.setVelocityY(0);
       }
     }
 
     // allow user to move left and right always
     if (cursorKeys.right.isDown) {
-      this.square.body.setVelocityX(500);
+      this.player.body.setVelocityX(500);
     } else if (cursorKeys.left.isDown) {
-      this.square.body.setVelocityX(-500);
+      this.player.body.setVelocityX(-500);
     } else {
-      this.square.body.setVelocityX(0);
+      this.player.body.setVelocityX(0);
     }
   }
 }

@@ -7,6 +7,7 @@ export enum BlockType {
   BACKGROUND = 'background',
 }
 
+// blocks are 70 x 70
 export class Block extends GameObjects.Sprite {
   body: Phaser.Physics.Arcade.Body;
 
@@ -20,8 +21,8 @@ export class Block extends GameObjects.Sprite {
     super(scene, x, y, texture);
     this.scene.physics.add.existing(this, type === BlockType.SOLID);
     if (type === BlockType.MOVEABLE) {
-
-    } else if (type === BlockType.SOLID) {
+      this.body.setFriction(1000);
+      this.body.setDamping(true);
     }
     scene.add.existing(this);
   }
