@@ -41,6 +41,11 @@ export class BootScene extends Phaser.Scene {
     this.load.atlas('hammer', 'assets/sprites/hammer.png', 'assets/sprites/hammer.json');
 
     this.load.audio('intense', 'assets/music/intense.mp3');
+    this.load.audio('bgm_industrial_loop', 'assets/music/bgm_Industrial_loop.wav')
+
+    this.load.audio('char_death', 'assets/sounds/character_death.wav');
+    this.load.audio('jump', 'assets/sounds/jump_334.wav');
+    this.load.audio('start', 'assets/sounds/Start.wav');
   }
 
   public create() {

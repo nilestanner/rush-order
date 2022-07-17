@@ -65,6 +65,7 @@ export class Player extends GameObjects.Sprite {
     };
 
     this.body.setSize(16, 26, false);
+    this.scene.game.sound.play('start');
   }
 
   update() {
@@ -88,6 +89,7 @@ export class Player extends GameObjects.Sprite {
     const cursorKeys = this.scene.input.keyboard.createCursorKeys();
     if (!this.moveState.inAir) {
       if (cursorKeys.up.isDown) {
+        this.scene.game.sound.play('jump');
         currentVY = -this.jumpVelocity;
       } else if (cursorKeys.down.isDown) {
         currentVY += this.velocityRamping;
@@ -184,6 +186,7 @@ export class Player extends GameObjects.Sprite {
   }
 
   startOver() {
+    this.scene.game.sound.play('char_death');
     this.setPosition(this.startX, this.startY);
     this.body.setVelocity(0, 0);
   }

@@ -55,6 +55,15 @@ export class RunScene extends Phaser.Scene {
     this.physics.add.collider(this.staticObjects, this.movables);
     
     this.physics.world.setBoundsCollision(true, true, true, true);
+
+    // start music in 200ms;
+    window.setTimeout(() => {
+
+      this.game.sound.play('bgm_industrial_loop', {
+        loop: true,
+        rate: 1,
+      });
+    }, 300);
   }
 
   public update() {
