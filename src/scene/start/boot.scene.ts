@@ -39,6 +39,8 @@ export class BootScene extends Phaser.Scene {
     this.load.atlas('crusher', 'assets/sprites/crusher.png', 'assets/sprites/crusher.json');
     this.load.atlas('flip_platform', 'assets/sprites/flip_platform.png', 'assets/sprites/flip_platform.json');
     this.load.atlas('hammer', 'assets/sprites/hammer.png', 'assets/sprites/hammer.json');
+
+    this.load.audio('intense', 'assets/music/intense.mp3');
   }
 
   public create() {

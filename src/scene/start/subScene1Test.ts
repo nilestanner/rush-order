@@ -23,6 +23,7 @@ export class RunSceneTest1 extends RunScene {
   public belts: Array<ConveyorBelt> = []
   public player: Player;
   public finalDoor: Door;
+  public fallingBlocks: Array<Block> = [];
 
   constructor() {
     super(sceneConfig);
@@ -32,6 +33,8 @@ export class RunSceneTest1 extends RunScene {
     console.log('scene start');
     const offsetX = 500;
     const offsetY = 500;
+    const deltaOfFallingBlocks = 300;
+    const fallingBlockLoopAround = 1200;
 
     this.finalDoor = new Door(this, (64 * 19) + offsetX, (64 * 2) + offsetY, 'crusher');
     
@@ -45,7 +48,9 @@ export class RunSceneTest1 extends RunScene {
       new Block(this, (64 * 6) + offsetX, 64 + offsetY, 'single_block_floor', BlockType.SOLID),
       new Block(this, (64 * 9) + offsetX, 64 + offsetY, 'single_block_floor', BlockType.SOLID),
       new Block(this, (64 * 19) + offsetX, (64 * 1) + offsetY, 'single_block_floor', BlockType.SOLID),
-     
+
+      // Other side of falling block gap
+      ...components.lineOfBlocks(this, (64 * 19) + offsetX + 9 * deltaOfFallingBlocks, fallingBlockLoopAround, 6, 'single_block_floor', BlockType.SOLID),
     ];
     this.collectibles = [
       new Collectible(this, (64 * 15) + offsetX, 64 + offsetY, 'card', CollectibleType.CARD),
@@ -56,8 +61,30 @@ export class RunSceneTest1 extends RunScene {
       new Hammer(this, (64 * 6) + offsetX, (64 * 2) + offsetY),
       new Hammer(this, (64 * 9) + offsetX, (64 * 2) + offsetY),
     ];
+
+    this.fallingBlocks = [
+      ...components.lineOfBlocks(
+        this, 64 * (20 + 3) + offsetX, 200 + offsetY, 8, 'metal_crate_block_floor', BlockType.MOVEABLE, deltaOfFallingBlocks),
+      ...components.lineOfBlocks(
+        this, 64 * (20 + 3) + offsetX + 64, 200 + offsetY, 8, 'metal_crate_block_floor', BlockType.MOVEABLE, deltaOfFallingBlocks),
+    ];
+    
+    this.fallingBlocks.forEach((b: any) => { // enable falling blocks to wrap arround
+      b.startX = b.x;
+      b.startY = b.y;
+      b.update = (() => {
+        const tooLow = b.body.y > fallingBlockLoopAround;
+        if (tooLow) {
+          // wrap around to the top
+          b.setPosition(b.startX, b.startY);
+        }
+        b.body.setVelocity(0, 10);
+      }).bind(b);
+      return b;
+    });
     
     this.movables.push(new Block(this, 600, 430, 'metal_crate_block_floor', BlockType.MOVEABLE));
+    this.movables.push(...this.fallingBlocks);
 
     // must create player after other objects so collisions work
     this.player = new Player(this, 50 + offsetX, 130 + offsetY, 'player_idle');
@@ -68,10 +95,20 @@ export class RunSceneTest1 extends RunScene {
 
     this.cameras.main.setBounds(0, 0, 100000, 100000);
     this.cameras.main.startFollow(this.player);
+
+    // start music in 200ms;
+    window.setTimeout(() => {
+
+      this.game.sound.play('intense', {
+        loop: true,
+        rate: 0.9,
+      });
+    }, 300);
   }
 
   public update() {
     this.player.update();
     this.hammers.forEach(h => h.update());
+    this.fallingBlocks.forEach(b => b.update());
   }
 }

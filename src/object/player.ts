@@ -16,11 +16,14 @@ export class Player extends GameObjects.Sprite {
     running: boolean;
   }
   maxXVelocity = 500;
-  maxXAirVelocity = 600;
+  maxXAirVelocity = 500;
   velocityRamping = 50;
   velocityAirRamping = 25;
   velocityDamping = 200;
   jumpVelocity = 500;
+
+  startX: number;
+  startY: number;
 
   constructor(
     scene: Scene,
@@ -29,6 +32,8 @@ export class Player extends GameObjects.Sprite {
     texture: string,
   ) {
     super(scene, x, y, texture);
+    this.startX = x;
+    this.startY = y;
     
     this.scene.physics.add.existing(this);
     this.scene.physics.add.collider(this, this.scene.movables);
@@ -65,8 +70,16 @@ export class Player extends GameObjects.Sprite {
   update() {
     this.moveState.inAir = !this.body.touching.down;
     if (this.body.velocity.x < 0) {
+      if (!this.moveState.left) {
+        // switch
+        this.setPosition(this.x - 9, this.y); // theres this subtle difference between left and right sprites
+      }
       this.moveState.left = true;
     } else if (this.body.velocity.x > 0) {
+      if (this.moveState.left) {
+        // switch
+        this.setPosition(this.x + 9, this.y); // theres this subtle difference between left and right sprites
+      }
       this.moveState.left = false;
     }
     this.moveState.running = this.body.velocity.x !== 0;
@@ -166,6 +179,12 @@ export class Player extends GameObjects.Sprite {
   squish(player: Player, hammer: Hammer) {
     if (hammer.canSquish(player)) {
       console.log('squished');
+      player.startOver();
     }
+  }
+
+  startOver() {
+    this.setPosition(this.startX, this.startY);
+    this.body.setVelocity(0, 0);
   }
 }
