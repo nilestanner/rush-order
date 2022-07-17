@@ -1,9 +1,10 @@
 import { Scene } from "phaser";
 import { Block, BlockType } from "../object/block";
+import { RunScene } from "../scene/start/start.scene";
 import { range } from "./utils";
 
 export function lineOfBlocks(
-  scene: Scene, x: number, y: number, numBlocks: number,
+  scene: RunScene, x: number, y: number, numBlocks: number,
   texture: string = 'single_metal_block_floor',
   blockType = BlockType.SOLID,
 ): Array<Block> {
@@ -17,7 +18,7 @@ export function lineOfBlocks(
 }
 
 export function stackOfBlocks(
-  scene: Scene, x: number, y: number, numBlocks: number,
+  scene: RunScene, x: number, y: number, numBlocks: number,
   texture: string = 'single_metal_block_floor',
   blockType = BlockType.SOLID,
 ): Array<Block> {
