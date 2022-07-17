@@ -2,6 +2,7 @@ import * as Phaser from 'phaser';
 import * as components from '../../components';
 import { Block, BlockType } from '../../object/block';
 import { Collectible, CollectibleType } from '../../object/collectible';
+import { ConveyorBelt } from '../../object/conveyor_belt';
 import { Door } from '../../object/door';
 import { Hammer } from '../../object/hammer';
 import { Player } from '../../object/player';
@@ -15,10 +16,11 @@ const sceneConfig: Phaser.Types.Scenes.SettingsConfig = {
 
 export class RunSceneTest1 extends RunScene {
 
-  public staticObjects: Array<Block> = [];
+  public staticObjects: Array<Block | Door> = [];
   public movables: Array<Block> = [];
   public collectibles: Array<Collectible> = [];
   public hammers: Array<Hammer> = [];
+  public belts: Array<ConveyorBelt> = []
   public player: Player;
   public finalDoor: Door;
 
