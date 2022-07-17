@@ -48,6 +48,6 @@ export class BootScene extends Phaser.Scene {
   }
 
   public update() {
-    this.scene.start('test1');
+    this.scene.start('main');
   }
 }

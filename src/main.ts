@@ -1,7 +1,7 @@
 import * as Phaser from 'phaser';
-import { BootScene } from './scene/start/boot.scene';
-import { RunScene } from './scene/start/start.scene';
-import { RunSceneTest1 } from './scene/start/subScene1Test';
+import { BootScene } from './scene/boot.scene';
+import { RunScene } from './scene/start.scene';
+import { RunSceneTest1 } from './scene/subScene1Test';
 
 const gameConfig: Phaser.Types.Core.GameConfig = {
   title: 'Sample',

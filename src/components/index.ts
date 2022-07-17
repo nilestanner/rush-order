@@ -1,6 +1,6 @@
 import { Scene } from "phaser";
 import { Block, BlockType } from "../object/block";
-import { RunScene } from "../scene/start/start.scene";
+import { RunScene } from "../scene/start.scene";
 import { range } from "./utils";
 
 export function lineOfBlocks(

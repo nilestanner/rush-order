@@ -1,6 +1,6 @@
 import { GameObjects, Scene } from 'phaser';
-import { RunScene } from '../scene/start/start.scene';
-import { RunSceneTest1 } from '../scene/start/subScene1Test';
+import { RunScene } from '../scene/start.scene';
+import { RunSceneTest1 } from '../scene/subScene1Test';
 import { ConveyorBelt } from './conveyor_belt';
 
 export enum BlockType {

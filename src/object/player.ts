@@ -1,6 +1,6 @@
 
 import { GameObjects, Scene } from 'phaser';
-import { RunScene } from '../scene/start/start.scene';
+import { RunScene } from '../scene/start.scene';
 import { Block } from './block';
 import { Collectible, CollectibleType } from './collectible';
 import { ConveyorBelt } from './conveyor_belt';

@@ -1,11 +1,11 @@
 import * as Phaser from 'phaser';
-import * as components from '../../components';
-import { Block, BlockType } from '../../object/block';
-import { Collectible, CollectibleType } from '../../object/collectible';
-import { ConveyorBelt } from '../../object/conveyor_belt';
-import { Door } from '../../object/door';
-import { Hammer } from '../../object/hammer';
-import { Player } from '../../object/player';
+import * as components from '../components';
+import { Block, BlockType } from '../object/block';
+import { Collectible, CollectibleType } from '../object/collectible';
+import { ConveyorBelt } from '../object/conveyor_belt';
+import { Door } from '../object/door';
+import { Hammer } from '../object/hammer';
+import { Player } from '../object/player';
 import { RunScene } from './start.scene';
 
 const sceneConfig: Phaser.Types.Scenes.SettingsConfig = {
