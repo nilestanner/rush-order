@@ -11,23 +11,20 @@ export const makeHammerHall: makeMiniScene = (
   offsetX: number,
   offsetY: number,
 ) => {
-  // correct for the entry point of the module
-  offsetX += 0;
-  offsetY += 128;
   const staticObjects = [
-    ...components.lineOfBlocks(scene, 0 + offsetX, 0 + offsetY, 12, 'single_block_floor', BlockType.SOLID),
-    new Block(scene, 0 + offsetX, 64 + offsetY, 'single_block_floor', BlockType.SOLID),
+    ...components.lineOfBlocks(scene, 0 + offsetX, 0 + offsetY - 128, 12, 'single_block_floor', BlockType.SOLID),
+    new Block(scene, 0 + offsetX, offsetY - 64, 'single_block_floor', BlockType.SOLID),
     
-    ...components.lineOfBlocks(scene, 0 + offsetX, 192 + offsetY, 12, 'single_block_floor', BlockType.SOLID),
-    new Block(scene, (64 * 3) + offsetX, 64 + offsetY, 'single_block_floor', BlockType.SOLID),
-    new Block(scene, (64 * 6) + offsetX, 64 + offsetY, 'single_block_floor', BlockType.SOLID),
-    new Block(scene, (64 * 9) + offsetX, 64 + offsetY, 'single_block_floor', BlockType.SOLID),
-    new Block(scene, (64 * 11) + offsetX, (64 * 1) + offsetY, 'single_block_floor', BlockType.SOLID),
+    ...components.lineOfBlocks(scene, 0 + offsetX, 64 + offsetY, 12, 'single_block_floor', BlockType.SOLID),
+    new Block(scene, (64 * 3) + offsetX, offsetY - 64, 'single_block_floor', BlockType.SOLID),
+    new Block(scene, (64 * 6) + offsetX, offsetY - 64, 'single_block_floor', BlockType.SOLID),
+    new Block(scene, (64 * 9) + offsetX, offsetY - 64, 'single_block_floor', BlockType.SOLID),
+    new Block(scene, (64 * 11) + offsetX, offsetY - 64, 'single_block_floor', BlockType.SOLID),
   ];
   const hammers = [
-    new Hammer(scene, (64 * 3) + offsetX, (64 * 2) + offsetY),
-    new Hammer(scene, (64 * 6) + offsetX, (64 * 2) + offsetY),
-    new Hammer(scene, (64 * 9) + offsetX, (64 * 2) + offsetY),
+    new Hammer(scene, (64 * 3) + offsetX, offsetY),
+    new Hammer(scene, (64 * 6) + offsetX, offsetY),
+    new Hammer(scene, (64 * 9) + offsetX, offsetY),
   ];
 
   return {
@@ -38,7 +35,7 @@ export const makeHammerHall: makeMiniScene = (
     movables: [],
     exitPoint: {
       x: (64 * 11) + offsetX,
-      y: (64 * 2) + offsetY,
+      y: offsetY,
     },
     entryPoint: {
       x: offsetX,

@@ -7,6 +7,8 @@ import { ConveyorBelt } from '../object/conveyor_belt';
 import { Hammer } from '../object/hammer';
 import { Player } from '../object/player';
 import { makeHammerHall } from '../mini-scenes/hammer-hall';
+import { makeStairPillars } from '../mini-scenes/stair-pillars';
+import { RandomlyOrderMiniScenes } from '../mini-scenes/mini-scene-builder';
 
 const sceneConfig: Phaser.Types.Scenes.SettingsConfig = {
   active: false,
@@ -31,49 +33,21 @@ export class RunScene extends Phaser.Scene {
   public create() {
     console.log('scene start');
 
-    const hammerHall = makeHammerHall(this, 500, 500);
+    const route = RandomlyOrderMiniScenes(this, 2000, 2000, [
+      makeHammerHall,
+      makeHammerHall,
+      makeStairPillars,
+      makeStairPillars,
+    ]);
 
-    const parts = [hammerHall];
+    this.staticObjects.push(...route.staticObjects);
+    this.movables.push(...route.movables);
+    this.collectibles.push(...route.collectibles);
+    this.belts.push(...route.belts);
+    this.hammers.push(...route.hammers);
 
-    parts.forEach((part) => {
-      this.staticObjects.push(...part.staticObjects);
-      this.movables.push(...part.movables);
-      this.collectibles.push(...part.collectibles);
-      this.belts.push(...part.belts);
-    });
-
-    // this.belts = [
-    //   new ConveyorBelt(this, 400, 400, 'conveyor_belt', new Phaser.Math.Vector2(0.5,0)),
-    //   new ConveyorBelt(this, 400, 800, 'conveyor_belt', new Phaser.Math.Vector2(0.5,0)),
-    //   new ConveyorBelt(this, 500, 900, 'conveyor_belt', new Phaser.Math.Vector2(4,0)),
-    //   new ConveyorBelt(this, 600, 1000, 'conveyor_belt', new Phaser.Math.Vector2(-0.5,0)),
-    // ]
-    
-    // this.staticObjects = [
-    //   new Block(this, 800, 400, 'single_block_floor', BlockType.SOLID),
-    //   new Block(this, 400, 500, 'single_block_floor', BlockType.SOLID),
-
-    //   new Block(this, 190, 430, 'single_block_floor', BlockType.SOLID),
-
-    //   ...components.lineOfBlocks(this, 190, 500, 9, 'single_block_floor', BlockType.SOLID),
-
-    // ];
-    // this.collectibles = [
-    //   new Collectible(this, 600, 350, 'cash', CollectibleType.CASH),
-    //   new Collectible(this, 650, 350, 'card', CollectibleType.CARD),
-    // ]
-
-    // this.hammers = [
-    //   new Hammer(this, 460, 430),
-    // ];
-    
-    // this.movables.push(new Block(this, 600, 430, 'metal_crate_block_floor', BlockType.MOVEABLE));
-    // this.movables.push(new Block(this, 400, 300, 'metal_crate_block_floor', BlockType.MOVEABLE));
-    // this.movables.push(new Block(this, 400, 700, 'metal_crate_block_floor', BlockType.MOVEABLE));
-
-    // must create player after other objects so collisions work
-    console.log(parts[0].entryPoint.x, parts[0].entryPoint.y)
-    this.player = new Player(this, parts[0].entryPoint.x, parts[0].entryPoint.y + 64, 'player_idle');
+    console.log(route.entryPoint.x, route.entryPoint.y)
+    this.player = new Player(this, route.entryPoint.x, route.entryPoint.y, 'player_idle');
 
     this.cameras.main.setBounds(0, 0, 100000, 100000);
     this.cameras.main.startFollow(this.player);
