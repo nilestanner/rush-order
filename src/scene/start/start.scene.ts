@@ -2,6 +2,7 @@ import * as Phaser from 'phaser';
 import * as components from '../../components';
 import { Block, BlockType } from '../../object/block';
 import { Collectible, CollectibleType } from '../../object/collectible';
+import { Door } from '../../object/door';
 import { Hammer } from '../../object/hammer';
 import { Player } from '../../object/player';
 
@@ -18,8 +19,9 @@ export class RunScene extends Phaser.Scene {
   public collectibles: Array<Collectible> = [];
   public hammers: Array<Hammer> = [];
   public player: Player;
+  public finalDoor: Door;
 
-  constructor() {
+  constructor(sceneConfig) {
     super(sceneConfig);
   }
 

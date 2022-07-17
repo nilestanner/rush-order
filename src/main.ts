@@ -1,10 +1,11 @@
 import * as Phaser from 'phaser';
 import { BootScene } from './scene/start/boot.scene';
 import { RunScene } from './scene/start/start.scene';
+import { RunSceneTest1 } from './scene/start/subScene1Test';
 
 const gameConfig: Phaser.Types.Core.GameConfig = {
   title: 'Sample',
-  scene: [BootScene, RunScene],
+  scene: [BootScene, RunScene, RunSceneTest1],
   type: Phaser.AUTO,
 
   scale: {

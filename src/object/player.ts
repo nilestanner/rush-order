@@ -149,6 +149,7 @@ export class Player extends GameObjects.Sprite {
       
     } else if (collectible.type === CollectibleType.CARD) {
       console.log('picked up card');
+      player.scene.finalDoor.open();
     }
 
     collectible.destroy();

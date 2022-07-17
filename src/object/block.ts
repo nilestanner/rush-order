@@ -18,6 +18,8 @@ export class Block extends GameObjects.Sprite {
     type: BlockType = BlockType.SOLID,
   ) {
     super(scene, x, y, texture);
+    this.displayHeight = 64;
+    this.displayWidth = 64;
     this.scene.physics.add.existing(this, type === BlockType.SOLID);
     if (type === BlockType.MOVEABLE) {
       this.body.setFriction(1000);
