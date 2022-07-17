@@ -10,7 +10,7 @@ export function lineOfBlocks(
 ): Array<Block> {
   return range(0, numBlocks).map(i => (new Block(
     scene,
-    x + i*70,
+    x + i*64,
     y,
     texture,
     blockType,

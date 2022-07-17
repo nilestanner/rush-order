@@ -1,5 +1,6 @@
 import { GameObjects, Scene } from 'phaser';
 import { RunScene } from '../scene/start/start.scene';
+import { RunSceneTest1 } from '../scene/start/subScene1Test';
 import { ConveyorBelt } from './conveyor_belt';
 
 export enum BlockType {
@@ -8,7 +9,6 @@ export enum BlockType {
   BACKGROUND = 'background',
 }
 
-// blocks are 70 x 70
 export class Block extends GameObjects.Sprite {
   body: Phaser.Physics.Arcade.Body;
   scene: RunScene;
@@ -21,6 +21,8 @@ export class Block extends GameObjects.Sprite {
     type: BlockType = BlockType.SOLID,
   ) {
     super(scene, x, y, texture);
+    this.displayHeight = 64;
+    this.displayWidth = 64;
     this.scene = scene;
     this.scene.physics.add.existing(this, type === BlockType.SOLID);
     if (type === BlockType.MOVEABLE) {
